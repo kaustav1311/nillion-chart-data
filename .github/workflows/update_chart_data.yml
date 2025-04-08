@@ -2,8 +2,8 @@ name: Update Daily Chart Data
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # 3AM UTC daily
-  workflow_dispatch:
+    - cron: '0 3 * * *'  # Runs every day at 3 AM UTC
+  workflow_dispatch:      # Allow manual trigger
 
 jobs:
   update:
@@ -25,9 +25,9 @@ jobs:
 
       - name: Commit and push if changed
         run: |
-          git config user.name "chart-bot"
-          git config user.email "chart-bot@users.noreply.github.com"
+          git config --global user.name "chart-bot"
+          git config --global user.email "chart-bot@users.noreply.github.com"
+          git pull origin main
           git add chart_data/daily.json
           git commit -m "📈 Auto-update chart data" || echo "No changes"
-          git push
-
+          git push origin HEAD:main
