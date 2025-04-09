@@ -21,7 +21,10 @@ def fetch_hourly_prices():
         "days": 2,
         "interval": "hourly"
     }
-    res = requests.get(url, params=params)
+    headers = {
+            "User-Agent": "Mozilla/5.0 (compatible; NillionBot/1.0; +https://github.com/kaustav1311/nillion-chart-data)"}
+    res = requests.get(url, params=params, headers=headers)
+
     res.raise_for_status()
     return res.json()["prices"]
 
