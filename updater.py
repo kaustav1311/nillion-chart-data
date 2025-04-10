@@ -65,7 +65,7 @@ def update_daily_json(new_entry):
         return
 
     data.append(new_entry)
-    data = data[-30:]
+    #data = data[-30:]
 
     with open(DATA_PATH, "w") as f:
         json.dump(data, f, indent=2)
